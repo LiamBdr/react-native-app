@@ -9,7 +9,14 @@ const TabComponent = () => {
     const Tab = createBottomTabNavigator();
 
     return (
-        <Tab.Navigator>
+        <Tab.Navigator
+            initialRouteName="Liste"
+            screenOptions={{
+                headerMode: 'screen',
+                headerTitle : 'Breaking Bad',
+            }}
+            
+        >
             <Tab.Screen name="Liste" component={CharacterList} options={{
                 tabBarIcon: ({ size, focused, color }) => {
                     return (

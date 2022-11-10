@@ -6,7 +6,7 @@ const FavoriteList = () => {
 
     return (
         <SafeAreaView>
-            <Text style={{fontSize: 20, fontWeight: 'bold', textAlign: 'center'}}>Favorite view</Text>
+            <Text style={{ fontSize: 20, fontWeight: 'bold', textAlign: 'center' }}>Favorite view</Text>
         </SafeAreaView>
     );
 }

@@ -10,7 +10,7 @@ const CharacterCard = ({ item }) => {
 
     return (
         <Pressable style={styles.card} >
-            <Image source={{ uri: item.image }} style={styles.image} />
+            <Image source={{ uri: item.img }} style={styles.image} />
             <Text style={styles.text}>{item.name}</Text>
         </Pressable>
     );
@@ -19,7 +19,7 @@ const CharacterCard = ({ item }) => {
 const styles = StyleSheet.create({
     card: {
         display: 'inline-flex',
-        height: 200,
+        height: 250,
         flex: 1,
         backgroundColor: 'white',
         shadowOpacity: 0.1,
@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
     },
     image: {
         width: '100%',
-        height: '70%',
+        height: '80%',
         resizeMode: 'cover',
         borderTopLeftRadius: 10,
         borderTopRightRadius: 10,
