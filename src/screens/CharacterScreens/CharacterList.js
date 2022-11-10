@@ -1,19 +1,8 @@
-import {
-    FlatList,
-    Text,
-    Image,
-    TouchableOpacity,
-} from 'react-native';
+import { FlatList, StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
-
-const Item = ({ item }) => (
-    <TouchableOpacity>
-        <Text>{item.name}</Text>
-        <Image source={{ uri: item.image }} style={{ width: 50, height: 50 }} />
-    </TouchableOpacity>
-);
+import CharacterCard from './CharacterCard';
 
 const CharacterList = () => {
 
@@ -28,20 +17,21 @@ const CharacterList = () => {
             })
     }, []);
 
-    const renderItem = ({ item }) => {
+    const renderItem = useCallback(({ item }) => {
         return (
-            <Item
-                item={item}
-            />
+            <CharacterCard item={item} />
         );
-    };
+    });
 
     return (
         <SafeAreaView>
             <FlatList
                 data={data}
+                extraData={data}
                 renderItem={renderItem}
                 keyExtractor={item => item.id}
+                numColumns={2}
+                showsVerticalScrollIndicator={false}
                 onEndReachedThreshold={0.1}
                 onEndReached={() => {
                     if (pagination) {
@@ -56,4 +46,5 @@ const CharacterList = () => {
         </SafeAreaView>
     );
 }
+
 export default CharacterList
