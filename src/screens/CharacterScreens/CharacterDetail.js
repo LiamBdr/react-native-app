@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, Image, StyleSheet, ScrollView } from 'react-native';
+import { View, Text, Image, StyleSheet, ScrollView, Button } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 const CharacterDetail = ({ navigation, route }) => {
@@ -12,9 +12,12 @@ const CharacterDetail = ({ navigation, route }) => {
         <SafeAreaView>
             <ScrollView>
                 <View style={styles.container}>
-                    <Text style={styles.title}>{item.name} alias {item.nickname}</Text>
-                    <Text style={styles.text}>Anniversaire {item.birthday}</Text>
-                    <Image source={{ uri: item.img }} style={styles.image} />
+                    <Text style={styles.title}>{item.name}</Text>
+                    <Text style={styles.text}>Genre : {item.gender}</Text>
+                    <Text style={styles.text}>Localisation : {item.location.name}</Text>
+                    <Text style={styles.text}>Espèce : {item.species}</Text>
+                    <Image source={{ uri: item.image }} style={styles.image} />
+                    <Button title="Ajouter aux favoris" onPress={() => {}} />
                 </View>
             </ScrollView>
         </SafeAreaView>

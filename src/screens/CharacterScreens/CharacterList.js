@@ -10,10 +10,11 @@ const CharacterList = ({ navigation }) => {
     const [offset, setOffset] = useState(0);
 
     useEffect(() => {
-        axios.get('https://www.breakingbadapi.com/api/characters?limit=10&offset=' + offset)
+        axios.get('https://rickandmortyapi.com/api/character')
             .then(response => {
-                setData(response.data);
-                setOffset(offset + 10)
+                console.log(response.data);
+                setData(response.data.results);
+                setOffset(response.data.info.next)
             })
             .catch(error => {
                 console.log(error);
@@ -32,16 +33,16 @@ const CharacterList = ({ navigation }) => {
                 data={data}
                 extraData={data}
                 renderItem={renderItem}
-                keyExtractor={item => item.char_id}
+                keyExtractor={item => item.id}
                 numColumns={2}
                 showsVerticalScrollIndicator={false}
-                onEndReachedThreshold={0.4}
+                onEndReachedThreshold={1}
                 onEndReached={() => {
-                    if (offset < 70) {
-                        axios.get('https://www.breakingbadapi.com/api/characters?limit=10&offset=' + offset)
+                    if (offset) {
+                        axios.get(offset)
                             .then(response => {
-                                setData(data.concat(response.data));
-                                setOffset(offset + 10);
+                                setData([...data, ...response.data.results]);
+                                setOffset(response.data.info.next)
                             })
                     }
                 }}

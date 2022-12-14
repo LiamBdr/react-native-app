@@ -10,7 +10,7 @@ import React from 'react';
 const CharacterCard = ({item, navigation}) => {
     return (
         <Pressable style={styles.card} onPress={() => navigation.navigate('CharacterDetail', {item:item})}>
-            <Image source={{ uri: item.img }} style={styles.image} />
+            <Image source={{ uri: item.image }} style={styles.image} />
             <Text style={styles.text}>{item.name}</Text>
         </Pressable>
     );
