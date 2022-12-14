@@ -1,13 +1,36 @@
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import React from 'react';
-import { Text } from 'react-native';
+import React, { useState, useEffect, useCallback } from 'react';
+import { FlatList } from 'react-native';
+import FavoriteCard from './FavoriteCard';
 
 const FavoriteList = () => {
 
+    const [favoris, setFavoris] = useState();
+
+    useEffect(() => {
+        AsyncStorage.getItem('favoris').then((value) => {
+            if (value !== null) {
+                setFavoris(JSON.parse(value));
+            }
+        });
+    });
+
+    const renderItem = useCallback(({ item }) => {
+        return (
+            <FavoriteCard item={item} />
+        );
+    });
+    
+
     return (
         <SafeAreaView>
-            <Text style={{ fontSize: 20, fontWeight: 'bold', textAlign: 'center' }}>Favorite view</Text>
-        </SafeAreaView>
+        <FlatList
+            data={favoris}
+            renderItem={renderItem}
+            keyExtractor={item => item.id}
+        />
+    </SafeAreaView>
     );
 }
 

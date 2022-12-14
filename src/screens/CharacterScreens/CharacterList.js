@@ -12,7 +12,6 @@ const CharacterList = ({ navigation }) => {
     useEffect(() => {
         axios.get('https://rickandmortyapi.com/api/character')
             .then(response => {
-                console.log(response.data);
                 setData(response.data.results);
                 setOffset(response.data.info.next)
             })
@@ -36,7 +35,7 @@ const CharacterList = ({ navigation }) => {
                 keyExtractor={item => item.id}
                 numColumns={2}
                 showsVerticalScrollIndicator={false}
-                onEndReachedThreshold={1}
+                onEndReachedThreshold={0.5}
                 onEndReached={() => {
                     if (offset) {
                         axios.get(offset)
