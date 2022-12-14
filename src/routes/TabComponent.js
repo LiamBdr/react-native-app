@@ -1,10 +1,10 @@
 import * as React from 'react';
 import { Image, Text } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import CharacterList from '../screens/CharacterScreens/CharacterList';
 import FavoriteList from '../screens/FavoriteScreens/FavoriteList';
 import { FontAwesome5 } from '@expo/vector-icons'; 
 import { SimpleLineIcons } from '@expo/vector-icons';
+import CharacterStack from '../screens/CharacterScreens/CharacterStack';
 
 const TabComponent = () => {
 
@@ -24,11 +24,11 @@ const TabComponent = () => {
                     backgroundColor: 'white',
                     borderBottomColor: 'rgb(50,95,55)',
                     borderBottomWidth: 2,
-                    height: 95,
+                    height: 100,
                 },  
             }}
         >
-            <Tab.Screen name="Liste" component={CharacterList} 
+            <Tab.Screen name="Liste" component={CharacterStack} 
                 options={{
                 tabBarIcon: ({ size, focused, color }) => <FontAwesome5 name="caravan" size={24} color={focused ? "#fcd303" : "#325f37"} />,
                 tabBarLabel: ({focused}) => <Text style={{ fontSize: 12, fontWeight: 'bold', color: focused ? "black" : "#325f37" }}> Home </Text> ,

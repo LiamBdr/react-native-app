@@ -1,10 +1,10 @@
-import { FlatList, Text } from 'react-native';
+import { FlatList } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import React, { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
 import CharacterCard from './CharacterCard';
 
-const CharacterList = () => {
+const CharacterList = ({ navigation }) => {
 
     const [data, setData] = useState();
     const [offset, setOffset] = useState(0);
@@ -13,7 +13,7 @@ const CharacterList = () => {
         axios.get('https://www.breakingbadapi.com/api/characters?limit=10&offset=' + offset)
             .then(response => {
                 setData(response.data);
-                setOffset(offset + 10);
+                setOffset(offset + 10)
             })
             .catch(error => {
                 console.log(error);
@@ -22,7 +22,7 @@ const CharacterList = () => {
 
     const renderItem = useCallback(({ item }) => {
         return (
-            <CharacterCard item={item} />
+            <CharacterCard item={item} navigation={navigation} />
         );
     });
 
@@ -37,7 +37,7 @@ const CharacterList = () => {
                 showsVerticalScrollIndicator={false}
                 onEndReachedThreshold={0.4}
                 onEndReached={() => {
-                    if(offset < 70) {
+                    if (offset < 70) {
                         axios.get('https://www.breakingbadapi.com/api/characters?limit=10&offset=' + offset)
                             .then(response => {
                                 setData(data.concat(response.data));
