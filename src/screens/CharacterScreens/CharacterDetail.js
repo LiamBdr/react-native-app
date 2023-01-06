@@ -1,32 +1,53 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, Image, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const CharacterDetail = ({ navigation, route }) => {
+    const [isInFavorites, setIsInFavorites] = useState(false);
 
-    const item = route.params.item;
+    useEffect(() => {
+        checkIfInFavorites();
+    }, []);
+
+    const checkIfInFavorites = async () => {
+        try {
+            const value = await AsyncStorage.getItem('favoris');
+            if (value !== null) {
+                const array = JSON.parse(value);
+                if (array.some(e => e.id === route.params.item.id)) {
+                    setIsInFavorites(true);
+                }
+            }
+        } catch (e) {
+            console.warn(e);
+        }
+    };
 
     const addFavorite = async () => {
         try {
             const value = await AsyncStorage.getItem('favoris');
             if (value !== null) {
                 const array = JSON.parse(value);
-                if (array.some(e => e.id === item.id)) {
-                    console.log(item.name + ' already exists in array');
+                if (array.some(e => e.id === route.params.item.id)) {
+                    console.log(route.params.item.name + ' already exists in array');
                     return;
                 }
-                array.push(item);
+                array.push(route.params.item);
                 await AsyncStorage.setItem('favoris', JSON.stringify(array));
-                console.log(item.name + ' added to existing array');
+                console.log(route.params.item.name + ' added to existing array');
+                setIsInFavorites(true);
             } else {
-                await AsyncStorage.setItem('favoris', JSON.stringify([item]))
-                console.log(item.name + ' added to new array');
+                await AsyncStorage.setItem('favoris', JSON.stringify([route.params.item]));
+                console.log(route.params.item.name + ' added to new array');
+                setIsInFavorites(true);
             }
         } catch (e) {
             console.warn(e);
         }
-    }
+    };
+
+    const item = route.params.item;
 
     return (
         <SafeAreaView>
@@ -37,9 +58,11 @@ const CharacterDetail = ({ navigation, route }) => {
                     <Text style={styles.text}>Localisation : {item.location.name}</Text>
                     <Text style={styles.text}>Espèce : {item.species}</Text>
                     <Image source={{ uri: item.image }} style={styles.image} />
-                    <TouchableOpacity style={styles.button} onPress={addFavorite}>
-                        <Text style={styles.buttonText}>Ajouter aux favoris</Text>
-                    </TouchableOpacity>
+                    {!isInFavorites && (
+                        <TouchableOpacity style={styles.button} onPress={addFavorite}>
+                            <Text style={styles.buttonText}>Ajouter aux favoris</Text>
+                        </TouchableOpacity>
+                    )}
                 </View>
             </ScrollView>
         </SafeAreaView>
