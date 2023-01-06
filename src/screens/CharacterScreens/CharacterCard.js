@@ -6,10 +6,10 @@ import {
 } from 'react-native';
 import React from 'react';
 
-const CharacterCard = ({ item }) => {
 
+const CharacterCard = ({item, navigation}) => {
     return (
-        <Pressable style={styles.card} >
+        <Pressable style={styles.card} onPress={() => navigation.navigate('CharacterDetail', {item:item})}>
             <Image source={{ uri: item.image }} style={styles.image} />
             <Text style={styles.text}>{item.name}</Text>
         </Pressable>
@@ -19,7 +19,7 @@ const CharacterCard = ({ item }) => {
 const styles = StyleSheet.create({
     card: {
         display: 'inline-flex',
-        height: 200,
+        height: 270,
         flex: 1,
         backgroundColor: 'white',
         shadowOpacity: 0.1,
@@ -28,18 +28,21 @@ const styles = StyleSheet.create({
             width: 0,
             height: 1,
         },
-        borderRadius: 10,
         margin: 10,
         flexDirection: 'column',
         alignItems: 'center',
-        justifyContent: 'flex-start'
+        justifyContent: 'flex-start',
+        borderWidth : 2,
+        borderColor: 'rgb(50,95,55)',
+        borderStyle: 'solid',
+        borderRadius: 10,
     },
     image: {
         width: '100%',
-        height: '70%',
+        height: '82%',
         resizeMode: 'cover',
-        borderTopLeftRadius: 10,
-        borderTopRightRadius: 10,
+        borderTopLeftRadius: 8,
+        borderTopRightRadius: 8,
     },
     text: {
         fontSize: 16,
@@ -47,7 +50,7 @@ const styles = StyleSheet.create({
         color: 'black',
         margin: 10,
         textAlign: 'center',
-    },
+    }
 });
 
 export default CharacterCard
