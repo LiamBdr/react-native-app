@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, Image, StyleSheet, ScrollView, Button } from 'react-native';
+import { View, Text, Image, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -37,7 +37,9 @@ const CharacterDetail = ({ navigation, route }) => {
                     <Text style={styles.text}>Localisation : {item.location.name}</Text>
                     <Text style={styles.text}>Espèce : {item.species}</Text>
                     <Image source={{ uri: item.image }} style={styles.image} />
-                    <Button title="Ajouter aux favoris" onPress={addFavorite} />
+                    <TouchableOpacity style={styles.button} onPress={addFavorite}>
+                        <Text style={styles.buttonText}>Ajouter aux favoris</Text>
+                    </TouchableOpacity>
                 </View>
             </ScrollView>
         </SafeAreaView>
@@ -47,11 +49,12 @@ const CharacterDetail = ({ navigation, route }) => {
 styles = StyleSheet.create({
     image: {
         width: '80%',
-        height: 400,
+        height: 300,
         resizeMode: 'cover',
         borderRadius: 10,
         marginLeft: 'auto',
         marginRight: 'auto',
+        marginTop: 15,
         borderWidth: 2,
         borderColor: 'rgb(50,95,55)',
     },
@@ -66,8 +69,24 @@ styles = StyleSheet.create({
     text: {
         fontSize: 14,
         textAlign: 'center',
-        margin: 10,
-    }
+        margin: 3,
+    },
+    button: {
+        backgroundColor: 'rgb(50,95,55)',
+        borderRadius: 5,
+        padding: 8,
+        marginLeft: 'auto',
+        marginRight: 'auto',
+        marginTop: 15,
+        marginBottom: 15,
+        width: '50%',
+    },
+    buttonText: {
+        fontSize: 16,
+        fontWeight: 'bold',
+        color: 'white',
+        textAlign: 'center',
+    },
 });
 
 export default CharacterDetail;

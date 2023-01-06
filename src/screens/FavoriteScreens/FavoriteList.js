@@ -1,7 +1,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import React, { useState, useEffect, useCallback } from 'react';
-import { FlatList } from 'react-native';
+import { FlatList, Text, StyleSheet } from 'react-native';
 import FavoriteCard from './FavoriteCard';
 
 const FavoriteList = () => {
@@ -21,17 +21,31 @@ const FavoriteList = () => {
             <FavoriteCard item={item} />
         );
     });
-    
+
 
     return (
         <SafeAreaView>
-        <FlatList
-            data={favoris}
-            renderItem={renderItem}
-            keyExtractor={item => item.id}
-        />
-    </SafeAreaView>
+            <Text style={styles.title}>Mes favoris</Text>            
+            <FlatList
+                data={favoris}
+                renderItem={renderItem}
+                keyExtractor={item => item.id}
+                numColumns={2}
+                showsVerticalScrollIndicator={false}
+            />
+        </SafeAreaView>
     );
 }
+
+const styles = StyleSheet.create({
+    title: {
+        fontSize: 20,
+        fontWeight: 'bold',
+        color: 'black',
+        margin: 10,
+        textAlign: 'center',      
+        textTransform: 'uppercase',
+    }
+});
 
 export default FavoriteList
