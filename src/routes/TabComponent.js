@@ -6,6 +6,7 @@ import { FontAwesome5 } from '@expo/vector-icons';
 import { SimpleLineIcons } from '@expo/vector-icons';
 import CharacterStack from '../screens/CharacterScreens/CharacterStack';
 import SearchList from '../screens/SearchScreens/SearchList';
+import Profile from '../screens/ProfileScreens/Profile';
 
 const TabComponent = () => {
 
@@ -43,6 +44,12 @@ const TabComponent = () => {
                 options={{
                     tabBarIcon: ({ size, focused, color }) => <SimpleLineIcons name="magnifier" size={24} color={focused ? "#fcd303" : "#325f37"} />,
                     tabBarLabel: ({ focused }) => <Text style={{ fontSize: 12, fontWeight: 'bold', color: focused ? "black" : "#325f37" }}> Recherche </Text>,
+            }} />
+            {/* Add profil tab */}
+            <Tab.Screen name="Profil" component={Profile}
+                options={{
+                    tabBarIcon: ({ size, focused, color }) => <SimpleLineIcons name="user" size={24} color={focused ? "#fcd303" : "#325f37"} />,
+                    tabBarLabel: ({ focused }) => <Text style={{ fontSize: 12, fontWeight: 'bold', color: focused ? "black" : "#325f37" }}> Profil </Text>,
             }} />
         </Tab.Navigator>
     );
