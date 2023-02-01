@@ -25,7 +25,7 @@ const FavoriteList = () => {
 
     return (
         <SafeAreaView>
-            <Text style={styles.title}>Mes favoris</Text>            
+            {favoris && favoris.length === 0 && <Text style={styles.text}>Aucun favoris 😔</Text>}
             <FlatList
                 data={favoris}
                 renderItem={renderItem}
@@ -38,14 +38,15 @@ const FavoriteList = () => {
 }
 
 const styles = StyleSheet.create({
-    title: {
-        fontSize: 20,
-        fontWeight: 'bold',
+    text: {
+        fontSize: 16,
+        fontWeight: '300',
         color: 'black',
         margin: 10,
-        textAlign: 'center',      
-        textTransform: 'uppercase',
-    }
+        marginTop: 50,
+        textAlign: 'center',
+        margin: 'auto',
+    },
 });
 
 export default FavoriteList

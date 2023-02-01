@@ -18,8 +18,8 @@ const TabComponent = () => {
             screenOptions={{
                 headerMode: 'screen',
                 headerTitle: () => (
-                    <Image style={{ width: 80, height: '90%', resizeMode: 'contain', alignSelf: 'center' }}
-                        source={require('../../assets/images/breaking-bad-logo.png')}
+                    <Image style={{ width: 130, height: '100%', resizeMode: 'contain', alignSelf: 'center' }}
+                        source={require('../../assets/images/rick-morty-logo.png')}
                     />
                 ),
                 headerStyle: {
@@ -32,12 +32,12 @@ const TabComponent = () => {
         >
             <Tab.Screen name="Liste" component={CharacterStack}
                 options={{
-                    tabBarIcon: ({ size, focused, color }) => <FontAwesome5 name="caravan" size={24} color={focused ? "#fcd303" : "#325f37"} />,
+                    tabBarIcon: ({ size, focused, color }) => <FontAwesome5 name="rocket" size={24} color={focused ? "#fcd303" : "#325f37"} />,
                     tabBarLabel: ({ focused }) => <Text style={{ fontSize: 12, fontWeight: 'bold', color: focused ? "black" : "#325f37" }}> Home </Text>,
                 }} />
             <Tab.Screen name="Favoris" component={FavoriteList}
                 options={{
-                    tabBarIcon: ({ size, focused, color }) => <SimpleLineIcons name="chemistry" size={24} color={focused ? "#fcd303" : "#325f37"} />,
+                    tabBarIcon: ({ size, focused, color }) => <SimpleLineIcons name="target" size={24} color={focused ? "#fcd303" : "#325f37"} />,
                     tabBarLabel: ({ focused }) => <Text style={{ fontSize: 12, fontWeight: 'bold', color: focused ? "black" : "#325f37" }}> Favoris </Text>,
             }} />
             <Tab.Screen name="Recherche" component={SearchList}
@@ -48,7 +48,7 @@ const TabComponent = () => {
             {/* Add profil tab */}
             <Tab.Screen name="Profil" component={Profile}
                 options={{
-                    tabBarIcon: ({ size, focused, color }) => <SimpleLineIcons name="user" size={24} color={focused ? "#fcd303" : "#325f37"} />,
+                    tabBarIcon: ({ size, focused, color }) => <SimpleLineIcons name="game-controller" size={24} color={focused ? "#fcd303" : "#325f37"} />,
                     tabBarLabel: ({ focused }) => <Text style={{ fontSize: 12, fontWeight: 'bold', color: focused ? "black" : "#325f37" }}> Profil </Text>,
             }} />
         </Tab.Navigator>

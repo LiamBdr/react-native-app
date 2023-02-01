@@ -8,7 +8,7 @@ const CharacterDetail = ({ navigation, route }) => {
 
     useEffect(() => {
         checkIfInFavorites();
-    }, []);
+    });
 
     const checkIfInFavorites = async () => {
         try {
@@ -30,16 +30,13 @@ const CharacterDetail = ({ navigation, route }) => {
             if (value !== null) {
                 const array = JSON.parse(value);
                 if (array.some(e => e.id === route.params.item.id)) {
-                    console.log(route.params.item.name + ' already exists in array');
                     return;
                 }
                 array.push(route.params.item);
                 await AsyncStorage.setItem('favoris', JSON.stringify(array));
-                console.log(route.params.item.name + ' added to existing array');
                 setIsInFavorites(true);
             } else {
                 await AsyncStorage.setItem('favoris', JSON.stringify([route.params.item]));
-                console.log(route.params.item.name + ' added to new array');
                 setIsInFavorites(true);
             }
         } catch (e) {

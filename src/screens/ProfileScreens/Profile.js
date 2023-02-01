@@ -4,27 +4,21 @@ import { View, Text, Image, TextInput, TouchableOpacity } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Profile = () => {
-    const [favoritesCount, setFavoritesCount] = useState(0);
+    const [favoris, setFavoris] = useState();
+    const [favorisLength, setFavorisLength] = useState(0);
     const [name, setName] = useState('');
     const [age, setAge] = useState('');
     const [location, setLocation] = useState('');
 
     useEffect(() => {
-        getFavoritesCount();
-        getUserInfo();
-    }, []);
-
-    const getFavoritesCount = async () => {
-        try {
-            const value = await AsyncStorage.getItem('favoris');
+        AsyncStorage.getItem('favoris').then((value) => {
             if (value !== null) {
-                const array = JSON.parse(value);
-                setFavoritesCount(array.length);
+                setFavoris(JSON.parse(value));
+                setFavorisLength(JSON.parse(value).length);
             }
-        } catch (e) {
-            console.warn(e);
-        }
-    };
+        });
+        getUserInfo();
+    });
 
     const getUserInfo = async () => {
         try {
@@ -62,7 +56,7 @@ const Profile = () => {
             />
             <View style={styles.likesContainer}>
                 <Text style={styles.likesText}>
-                    {favoritesCount}
+                    {favorisLength} favoris
                 </Text>
                 <SimpleLineIcons name="heart" size={20} color="red" />
             </View>
@@ -101,10 +95,11 @@ const styles = {
         alignItems: 'center',
     },
     profileImage: {
-        width: 150,
-        height: 150,
+        width: 130,
+        height: 130,
         borderRadius: 75,
         marginBottom: 20,
+        marginTop: 40,
     },
     likesContainer: {
         flexDirection: 'row',
@@ -130,9 +125,10 @@ const styles = {
         backgroundColor: 'white',
         borderRadius: 5,
         padding: 10,
+        width: 250,
     },
     saveButton: {
-        backgroundColor: '#007AFF',
+        backgroundColor: 'rgb(50,95,55)',
         padding: 10,
         borderRadius: 5,
         marginTop: 20,
