@@ -20,9 +20,12 @@ const Profile = () => {
                 setFavorisLength(JSON.parse(value).length);
             }
         });
-        getUserInfo();
         getImage();
     });
+
+    useEffect(() => {
+        getUserInfo();
+    }, []);
 
     const getUserInfo = async () => {
         try {
